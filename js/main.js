@@ -25,13 +25,20 @@ window.onload = () => {
         })
 }
 
+document.querySelector('.btn-find-location').addEventListener('click', () => {
+    const address = document.querySelector('.address-lookup').value
+    let coordinates = locService.getLocationGeocode(address.split(' '))
+        coordinates.then(coords => renderCoordinates(coords.results[0].geometry.location))
+})
+
+
 document.querySelector('.btn').addEventListener('click', () => {
     mapService.getLocation()
         .then(pos => {
             mapService.showLocation(pos)
-            .then(pos=>weatherService.getWeather(pos.lat, pos.lng))
+                .then(pos => weatherService.getWeather(pos.lat, pos.lng))
                 .then(data => renderWeatherInfo(data))
-                locService.addLocationName(pos.coords.latitude, pos.coords.longitude).then(renderAddress)
+            locService.addLocationName(pos.coords.latitude, pos.coords.longitude).then(renderAddress)
         })
 
 })
@@ -46,10 +53,7 @@ function renderAddress(value) {
     document.querySelector('.user-location').innerText = address;
 }
 
-
-
 function onCopyLocation(url) {
-    debugger;
     const el = document.createElement('textarea');
     el.value = url;
     el.setAttribute('readonly', '');
@@ -61,7 +65,7 @@ function onCopyLocation(url) {
     document.body.removeChild(el);
 };
 
-function renderWeatherInfo(data){
+function renderWeatherInfo(data) {
     document.querySelector('.weather-window').innerHTML = `<h3>Today's Weather</h3>
     <span>${data.name}, ${data.sys.country}</span>
     <img src="https://image.flaticon.com/icons/svg/1087/1087295.svg" alt="" class="weather-img">
@@ -70,4 +74,9 @@ function renderWeatherInfo(data){
     <span>Humidity: ${data.main.humidity}%</span>
     <span>Wind </span>
     <span>Max ${data.main.temp_max} ℃ Min ${data.main.temp_min} ℃</span>`
+}
+
+function renderCoordinates({lat, lng}){
+    const coordinates = `latitude: ${lat}, 'longitude: ${lng}`
+    document.querySelector('.coordinates').innerText = coordinates
 }

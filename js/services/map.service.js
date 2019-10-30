@@ -9,17 +9,14 @@ var map;
 
 
 export function initMap(lat = 32.088019, lng = 34.803166) {
-    console.log('InitMap');
     return _connectGoogleApi()
         .then(() => {
-            console.log('google available');
 
             map = new google.maps.Map(
                 document.querySelector('#map'), {
                 center: { lat, lng },
                 zoom: 15
             })
-            console.log('Map!', map);
         })
 }
 
@@ -39,7 +36,7 @@ function panTo(lat, lng) {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-    const API_KEY = 'AIzaSyCvJvR2KyGNx_iVtPGMshqlhHL5ULgtGsI'; //TODO: Enter your API Key
+    const API_KEY = 'AIzaSyCvJvR2KyGNx_iVtPGMshqlhHL5ULgtGsI';
     var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;
@@ -69,15 +66,8 @@ function showLocation(position) {
         const latLng = { lat: position.coords.latitude, lng: position.coords.longitude }
         console.log(latLng)
         resolve(latLng)
-        // addLocationName(position.coords.latitude, position.coords.longitude);
     })
 }
-
-
-
-
-
-
 
 function handleLocationError(error) {
     var locationError = document.getElementById("locationError");
