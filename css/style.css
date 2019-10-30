@@ -10,16 +10,14 @@ body {
     border-radius: 12px;
 }
 
-<<<<<<< HEAD
 .location{
     justify-content: flex-end;
 }
-=======
+
 .weather-img{
     width: 40px;
 }
 
->>>>>>> 1495fbfda2e706e65a58b45a96721a3c2290f328
 
 .btn-copy-loc {
     height: 2rem;
@@ -71,12 +69,9 @@ body {
     flex-wrap: wrap;
 }
 
-<<<<<<< HEAD
 .align-right {
     align-items: flex-end;
 }
-=======
->>>>>>> 1495fbfda2e706e65a58b45a96721a3c2290f328
 
 .row-reverse {
     flex-direction: row-reverse;
