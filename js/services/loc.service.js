@@ -5,7 +5,7 @@ export default {
     addLocationName
 }
 
-var locs = [{ lat: 11.22, lng: 22.11 }]
+var locs = { lat: 11.22, lng: 22.11 }
 
 
 function getLocs() {
@@ -29,8 +29,8 @@ function getPosition() {
 function copyLocation() {
     return getLocs()
         .then(locs => {
-            let lat = locs[0].lat;
-            let lng = locs[0].lng;
+            let lat = locs.lat;
+            let lng = locs.lng;
             let query = `?lat=${lat}&lng=${lng}`
             let baseURL = new URL('https://artyomp1.github.io/travel-tip/index.html')
             let url = baseURL + query;
@@ -41,6 +41,8 @@ function copyLocation() {
 
 function addLocationName(lat, lng) {
     let urlAddress = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyAr1sqzMlxBHmfdTU5Sr3sldPfpHVUU3LI`;
+    locs.lat = lat
+    locs.lng = lng
     return getAnswer(urlAddress)
 
 }
