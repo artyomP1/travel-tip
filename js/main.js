@@ -31,8 +31,7 @@ document.querySelector('.btn').addEventListener('click', (ev) => {
         .then(pos => {
             mapService.showLocation(pos)
             .then(pos=>weatherService.getWeather(pos.lat, pos.lng))
-            // weatherService.getWeather(pos.lat, pos.lng)
-            //     .then()
+                .then(data => renderWeatherInfo(data))
         })
 
 })
@@ -53,3 +52,14 @@ function onCopyLocation(url) {
     document.execCommand('copy');
     document.body.removeChild(el);
 };
+
+function renderWeatherInfo(data){
+    document.querySelector('.weather-window').innerHTML = `<h3>Today's Weather</h3>
+    <span>${data.name}, ${data.sys.country}</span>
+    <img src="https://image.flaticon.com/icons/svg/1087/1087295.svg" alt="" class="weather-img">
+    <span>${data.weather[0].description}</span>
+    <span>Now ${data.main.temp}℃</span>
+    <span>Humidity: ${data.main.humidity}%</span>
+    <span>Wind </span>
+    <span>Max ${data.main.temp_max} ℃ Min ${data.main.temp_min} ℃</span>`
+}

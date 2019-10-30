@@ -6,6 +6,10 @@
     border-radius: 12px;
 }
 
+.weather-img{
+    width: 40px;
+}
+
 
 /* helpers */
 
@@ -45,13 +49,14 @@
     align-items: flex-start;
 }
 
+.align-end {
+    align-items: flex-end;
+}
+
 .flex.wrap {
     flex-wrap: wrap;
 }
 
-.align-center {
-    align-items: flex-end;
-}
 
 .row-reverse {
     flex-direction: row-reverse;
