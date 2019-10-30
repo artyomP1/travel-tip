@@ -44,8 +44,20 @@ document.querySelector('.btn').addEventListener('click', () => {
 })
 
 document.querySelector('.btn-copy-loc').onclick = () => {
-    locService.copyLocation()
-        .then(url => { onCopyLocation(url) })
+    // mapService.getLocation()
+    locService.getPosition()
+        .then(pos => {
+            console.log(pos)
+            let locs = pos.coords
+            onCopyLocation(locs);
+
+        })
+
+    // .then(locs => onCopyLocation(locs))
+
+
+    // .then(url => { onCopyLocation(url) })
+    // })
 }
 
 function renderAddress(value) {
@@ -53,16 +65,21 @@ function renderAddress(value) {
     document.querySelector('.user-location').innerText = address;
 }
 
-function onCopyLocation(url) {
-    const el = document.createElement('textarea');
-    el.value = url;
-    el.setAttribute('readonly', '');
-    el.style.position = 'absolute';
-    el.style.left = '-9999px';
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
+
+
+function onCopyLocation(locs) {
+    locService.copyLocation(locs)
+        .then((url) => {
+            const el = document.createElement('textarea');
+            el.value = url;
+            el.setAttribute('readonly', '');
+            el.style.position = 'absolute';
+            el.style.left = '-9999px';
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+        })
 };
 
 function renderWeatherInfo(data) {
