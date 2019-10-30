@@ -10,13 +10,21 @@
 
 <body>
     <h1>Travel TIP</h1>
-        <div class="body-wrapper flex align-start space-around">
-        <div id="map" style="width: 60%; height: 400px;"></div>
-        <button class="btn">Click Me</button>
-        <div class="weather-window"></div>
+    <div class="flex row-reverse align-start d">
+        <button class="btn">My Location</button>
+        <button class="btn-find-location">Go</button>
+        <input type="text">
+        <h2 class="user-location"></h2>
     </div>
+    <div class="body-wrapper flex align-start space-around">
+        <div class="weather-window"></div>
+
+        <div id="map" style="width: 60%; height: 400px;"></div>
 
 
+    </div>
+    <button class="btn-copy-loc">Copy Location</button>
+    
     <script src="lib/axios.min.js"></script>
     <script type="module" src="js/main.js"></script>
 </body>
