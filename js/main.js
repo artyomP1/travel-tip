@@ -25,14 +25,13 @@ window.onload = () => {
         })
 }
 
-document.querySelector('.btn').addEventListener('click', (ev) => {
-    console.log('Aha!', ev.target);
+document.querySelector('.btn').addEventListener('click', () => {
     mapService.getLocation()
         .then(pos => {
             mapService.showLocation(pos)
             .then(pos=>weatherService.getWeather(pos.lat, pos.lng))
                 .then(data => renderWeatherInfo(data))
-                locService.addLocationName(pos.lat, pos.lng).then(renderAddress)
+                locService.addLocationName(pos.coords.latitude, pos.coords.longitude).then(renderAddress)
         })
 
 })
@@ -50,6 +49,7 @@ function renderAddress(value) {
 
 
 function onCopyLocation(url) {
+    debugger;
     const el = document.createElement('textarea');
     el.value = url;
     el.setAttribute('readonly', '');

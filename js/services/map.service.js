@@ -16,9 +16,9 @@ export function initMap(lat = 32.088019, lng = 34.803166) {
 
             map = new google.maps.Map(
                 document.querySelector('#map'), {
-                    center: { lat, lng },
-                    zoom: 15
-                })
+                center: { lat, lng },
+                zoom: 15
+            })
             console.log('Map!', map);
         })
 }
@@ -65,10 +65,11 @@ export function getLocation() {
 function showLocation(position) {
     return new Promise((resolve, reject) => {
         addMarker({ lat: position.coords.latitude, lng: position.coords.longitude });
+        panTo(position.coords.latitude, position.coords.longitude)
         const latLng = { lat: position.coords.latitude, lng: position.coords.longitude }
         console.log(latLng)
         resolve(latLng)
-            // addLocationName(position.coords.latitude, position.coords.longitude);
+        // addLocationName(position.coords.latitude, position.coords.longitude);
     })
 }
 
