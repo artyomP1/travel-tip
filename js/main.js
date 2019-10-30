@@ -30,3 +30,11 @@ document.querySelector('.btn').addEventListener('click', (ev) => {
     console.log('Aha!', ev.target);
     mapService.panTo(35.6895, 139.6917);
 })
+
+
+
+const elCopyBtn = document.querySelector('.btn-copy-loc');
+
+elCopyBtn.onclick = () => {
+            locService.copyLocation()
+}
