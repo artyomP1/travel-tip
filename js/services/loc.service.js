@@ -26,23 +26,15 @@ function getPosition() {
 }
 
 function copyLocation() {
-    getLocs()
+    return getLocs()
         .then(locs => {
-           let lat = locs[0].lat;
-           let lng = locs[0].lng;
-           let query = `?lat=${lat}&lng=${lng}`
-           return query
-        })
-        .then(query=>{
-            // console.log(query)
+            let lat = locs[0].lat;
+            let lng = locs[0].lng;
+            let query = `?lat=${lat}&lng=${lng}`
             let baseURL = new URL('https://artyomp1.github.io/travel-tip/index.html')
             let url = baseURL + query;
             return Promise.resolve(url);
         })
-    // var searchParams = new URLSearchParams(paramsString);
-    // console.log(paramString);
-    // Should looke like that - 
-    // github.io/travelTip/index.html?lat=3.14&lng=1.63
 }
 
 

@@ -33,13 +33,17 @@ document.querySelector('.btn').addEventListener('click', (ev) => {
 
 document.querySelector('.btn-copy-loc').onclick = () => {
     locService.copyLocation()
-        .then(x => console.log(x)
-        )
-    // onCopyLocation();
-
+        .then(url => { onCopyLocation(url) })
 }
 
-function onCopyLocation(url){
-    document.querySelector('.copy-textarea').innerText = url;
-    
-}
+function onCopyLocation(url) {
+    const el = document.createElement('textarea');
+    el.value = url;
+    el.setAttribute('readonly', '');
+    el.style.position = 'absolute';
+    el.style.left = '-9999px';
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+};
