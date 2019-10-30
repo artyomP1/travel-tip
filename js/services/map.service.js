@@ -2,7 +2,8 @@ export default {
     initMap,
     addMarker,
     panTo,
-    getLocation
+    getLocation,
+
 }
 console.log('h');
 
@@ -63,6 +64,38 @@ export function getLocation() {
 
 function showLocation(position) {
     addMarker({ lat: position.coords.latitude, lng: position.coords.longitude });
+    console.log(position.coords.latitude, position.coords.longitude);
+    addLocationName(position.coords.latitude, position.coords.longitude);
+}
+
+function addLocationName(lat, lng) {
+    let urlAddress = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyAr1sqzMlxBHmfdTU5Sr3sldPfpHVUU3LI`;
+    getAnswer(urlAddress).then(renderAddress)
+}
+
+function renderAddress(value) {
+    console.log(value.results[0].formatted_address);
+    let address = value.results[0].formatted_address
+    document.querySelector('.user-location').innerText = address;
+
+}
+
+
+function getAnswer(url) {
+    var prmAns = axios.get(url)
+    console.log(prmAns);
+
+    var prm1 = prmAns.then(res => {
+        console.log('SERVICE GOT RES:', res.data);
+        return res.data;
+    })
+
+    // prm1.then(ans => {
+    //     console.log('Ans:', ans);
+    // })
+    // console.log(prm1);
+
+    return Promise.resolve(prm1)
 }
 
 
