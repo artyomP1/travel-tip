@@ -1,7 +1,8 @@
 export default {
     initMap,
     addMarker,
-    panTo
+    panTo,
+    getLocation
 }
 console.log('h');
 
@@ -9,11 +10,12 @@ console.log('h');
 var map;
 
 
-export function initMap(lat = 32.0749831, lng = 34.9120554) {
+export function initMap(lat = 32.088019, lng = 34.803166) {
     console.log('InitMap');
     return _connectGoogleApi()
         .then(() => {
             console.log('google available');
+
             map = new google.maps.Map(
                 document.querySelector('#map'), {
                     center: { lat, lng },
@@ -49,4 +51,36 @@ function _connectGoogleApi() {
         elGoogleApi.onload = resolve;
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
+}
+
+export function getLocation() {
+    if (!navigator.geolocation) {
+        alert("HTML5 Geolocation is not supported in your browser.");
+        return;
+    }
+    navigator.geolocation.getCurrentPosition(showLocation, handleLocationError);
+}
+
+function showLocation(position) {
+    addMarker({ lat: position.coords.latitude, lng: position.coords.longitude });
+}
+
+
+function handleLocationError(error) {
+    var locationError = document.getElementById("locationError");
+
+    switch (error.code) {
+        case 0:
+            locationError.innerHTML = "There was an error while retrieving your location: " + error.message;
+            break;
+        case 1:
+            locationError.innerHTML = "The user didn't allow this page to retrieve a location.";
+            break;
+        case 2:
+            locationError.innerHTML = "The browser was unable to determine your location: " + error.message;
+            break;
+        case 3:
+            locationError.innerHTML = "The browser timed out before retrieving the location.";
+            break;
+    }
 }
