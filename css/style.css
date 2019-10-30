@@ -1,4 +1,4 @@
-.weather-window{
+.weather-window {
     width: 20%;
     height: 400px;
     background-color: #fff;
@@ -6,9 +6,7 @@
     border-radius: 12px;
 }
 
-.btn{
-
-}
+.btn {}
 
 
 /* helpers */
@@ -49,7 +47,14 @@
     align-items: flex-start;
 }
 
-
 .flex.wrap {
     flex-wrap: wrap;
+}
+
+.align-end {
+    align-items: flex-end;
+}
+
+.row-reverse {
+    flex-direction: row-reverse;
 }
