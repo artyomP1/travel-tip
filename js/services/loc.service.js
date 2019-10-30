@@ -26,16 +26,13 @@ function getPosition() {
     })
 }
 
-function copyLocation() {
-    return getLocs()
-        .then(locs => {
-            let lat = locs.lat;
-            let lng = locs.lng;
+function copyLocation(locs) {
+            let lat = locs.latitude;
+            let lng = locs.longitude;
             let query = `?lat=${lat}&lng=${lng}`
             let baseURL = new URL('https://artyomp1.github.io/travel-tip/index.html')
             let url = baseURL + query;
             return Promise.resolve(url);
-        })
 }
 
 

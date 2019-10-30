@@ -29,16 +29,28 @@ document.querySelector('.btn').addEventListener('click', () => {
     mapService.getLocation()
         .then(pos => {
             mapService.showLocation(pos)
-            .then(pos=>weatherService.getWeather(pos.lat, pos.lng))
+                .then(pos => weatherService.getWeather(pos.lat, pos.lng))
                 .then(data => renderWeatherInfo(data))
-                locService.addLocationName(pos.coords.latitude, pos.coords.longitude).then(renderAddress)
+            locService.addLocationName(pos.coords.latitude, pos.coords.longitude).then(renderAddress)
         })
 
 })
 
 document.querySelector('.btn-copy-loc').onclick = () => {
-    locService.copyLocation()
-        .then(url => { onCopyLocation(url) })
+    // mapService.getLocation()
+    locService.getPosition()
+        .then(pos => {
+            console.log(pos)
+            let locs = pos.coords
+            onCopyLocation(locs);
+
+        })
+
+    // .then(locs => onCopyLocation(locs))
+
+
+    // .then(url => { onCopyLocation(url) })
+    // })
 }
 
 function renderAddress(value) {
@@ -48,20 +60,22 @@ function renderAddress(value) {
 
 
 
-function onCopyLocation(url) {
-    debugger;
-    const el = document.createElement('textarea');
-    el.value = url;
-    el.setAttribute('readonly', '');
-    el.style.position = 'absolute';
-    el.style.left = '-9999px';
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
+function onCopyLocation(locs) {
+    locService.copyLocation(locs)
+        .then((url) => {
+            const el = document.createElement('textarea');
+            el.value = url;
+            el.setAttribute('readonly', '');
+            el.style.position = 'absolute';
+            el.style.left = '-9999px';
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+        })
 };
 
-function renderWeatherInfo(data){
+function renderWeatherInfo(data) {
     document.querySelector('.weather-window').innerHTML = `<h3>Today's Weather</h3>
     <span>${data.name}, ${data.sys.country}</span>
     <img src="https://image.flaticon.com/icons/svg/1087/1087295.svg" alt="" class="weather-img">
