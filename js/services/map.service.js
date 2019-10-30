@@ -3,6 +3,7 @@ export default {
     addMarker,
     panTo
 }
+console.log('h');
 
 
 var map;
