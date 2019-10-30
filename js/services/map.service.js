@@ -56,8 +56,6 @@ export function getLocation() {
         if (!navigator.geolocation) {
             alert("HTML5 Geolocation is not supported in your browser.");
         }
-
-        // debugger;
         navigator.geolocation.getCurrentPosition(resolve, handleLocationError)
 
     })
@@ -70,35 +68,14 @@ function showLocation(position) {
         const latLng = { lat: position.coords.latitude, lng: position.coords.longitude }
         console.log(latLng)
         resolve(latLng)
-        addLocationName(position.coords.latitude, position.coords.longitude);
+            // addLocationName(position.coords.latitude, position.coords.longitude);
     })
 }
 
-function addLocationName(lat, lng) {
-    let urlAddress = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyAr1sqzMlxBHmfdTU5Sr3sldPfpHVUU3LI`;
-    getAnswer(urlAddress).then(renderAddress)
-}
-
-function renderAddress(value) {
-    console.log(value.results[0].formatted_address);
-    let address = value.results[0].formatted_address
-    document.querySelector('.user-location').innerText = address;
-
-}
 
 
-function getAnswer(url) {
-    var prmAns = axios.get(url)
-    console.log(prmAns);
 
-    var prm1 = prmAns.then(res => {
-        console.log('SERVICE GOT RES:', res.data);
-        return res.data;
-    })
 
-    return Promise.resolve(prm1)
-
-}
 
 
 function handleLocationError(error) {

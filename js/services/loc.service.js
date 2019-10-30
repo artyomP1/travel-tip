@@ -2,6 +2,7 @@ export default {
     getLocs: getLocs,
     getPosition: getPosition,
     copyLocation: copyLocation,
+    addLocationName
 }
 
 var locs = [{ lat: 11.22, lng: 22.11 }]
@@ -35,4 +36,24 @@ function copyLocation() {
             let url = baseURL + query;
             return Promise.resolve(url);
         })
+}
+
+
+function addLocationName(lat, lng) {
+    let urlAddress = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyAr1sqzMlxBHmfdTU5Sr3sldPfpHVUU3LI`;
+    return getAnswer(urlAddress)
+
+}
+
+function getAnswer(url) {
+    var prmAns = axios.get(url)
+    console.log(prmAns);
+
+    var prm1 = prmAns.then(res => {
+        console.log('SERVICE GOT RES:', res.data);
+        return res.data;
+    })
+
+    return Promise.resolve(prm1)
+
 }

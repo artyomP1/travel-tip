@@ -32,6 +32,7 @@ document.querySelector('.btn').addEventListener('click', (ev) => {
             mapService.showLocation(pos)
             .then(pos=>weatherService.getWeather(pos.lat, pos.lng))
                 .then(data => renderWeatherInfo(data))
+                locService.addLocationName(pos.lat, pos.lng).then(renderAddress)
         })
 
 })
@@ -40,6 +41,13 @@ document.querySelector('.btn-copy-loc').onclick = () => {
     locService.copyLocation()
         .then(url => { onCopyLocation(url) })
 }
+
+function renderAddress(value) {
+    let address = value.results[0].formatted_address
+    document.querySelector('.user-location').innerText = address;
+}
+
+
 
 function onCopyLocation(url) {
     const el = document.createElement('textarea');
