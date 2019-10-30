@@ -1,6 +1,6 @@
-console.log('Main!');
 import locService from './services/loc.service.js'
 import mapService from './services/map.service.js'
+import weatherService from './services/weather-service.js'
 // import getPosition from './services/map.service.js'
 
 locService.getLocs()
