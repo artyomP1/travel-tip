@@ -6,6 +6,7 @@ export default {
 
 var locs = [{ lat: 11.22, lng: 22.11 }]
 
+
 function getLocs() {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -27,12 +28,21 @@ function getPosition() {
 function copyLocation() {
     getLocs()
         .then(locs => {
-        //    console.log(typeof locs);
-        //    console.log(typeof locs[0].lat);
-           console.log(locs[0].lat);
-           console.log(locs[0].lng);
-           
+           let lat = locs[0].lat;
+           let lng = locs[0].lng;
+           let query = `?lat=${lat}&lng=${lng}`
+           return query
         })
+        .then(query=>{
+            // console.log(query)
+            let baseURL = new URL('https://artyomp1.github.io/travel-tip/index.html')
+            let url = baseURL + query;
+            return Promise.resolve(url);
+        })
+    // var searchParams = new URLSearchParams(paramsString);
+    // console.log(paramString);
+    // Should looke like that - 
+    // github.io/travelTip/index.html?lat=3.14&lng=1.63
 }
 
 

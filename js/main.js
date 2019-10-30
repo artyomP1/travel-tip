@@ -30,3 +30,16 @@ document.querySelector('.btn').addEventListener('click', (ev) => {
     mapService.getLocation()
 
 })
+
+document.querySelector('.btn-copy-loc').onclick = () => {
+    locService.copyLocation()
+        .then(x => console.log(x)
+        )
+    // onCopyLocation();
+
+}
+
+function onCopyLocation(url){
+    document.querySelector('.copy-textarea').innerText = url;
+    
+}
