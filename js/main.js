@@ -28,5 +28,11 @@ window.onload = () => {
 document.querySelector('.btn').addEventListener('click', (ev) => {
     console.log('Aha!', ev.target);
     mapService.getLocation()
+        .then(pos => {
+            mapService.showLocation(pos)
+            .then(pos=>weatherService.getWeather(pos.lat, pos.lng))
+            // weatherService.getWeather(pos.lat, pos.lng)
+            //     .then()
+        })
 
 })

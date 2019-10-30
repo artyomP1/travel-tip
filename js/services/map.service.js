@@ -2,7 +2,8 @@ export default {
     initMap,
     addMarker,
     panTo,
-    getLocation
+    getLocation,
+    showLocation
 }
 console.log('h');
 
@@ -18,9 +19,9 @@ export function initMap(lat = 32.088019, lng = 34.803166) {
 
             map = new google.maps.Map(
                 document.querySelector('#map'), {
-                    center: { lat, lng },
-                    zoom: 15
-                })
+                center: { lat, lng },
+                zoom: 15
+            })
             console.log('Map!', map);
         })
 }
@@ -54,15 +55,25 @@ function _connectGoogleApi() {
 }
 
 export function getLocation() {
-    if (!navigator.geolocation) {
-        alert("HTML5 Geolocation is not supported in your browser.");
-        return;
-    }
-    navigator.geolocation.getCurrentPosition(showLocation, handleLocationError);
+    return new Promise((resolve, reject) => {
+        if (!navigator.geolocation) {
+            alert("HTML5 Geolocation is not supported in your browser.");
+        }
+
+        // debugger;
+        navigator.geolocation.getCurrentPosition(resolve, handleLocationError)
+
+    })
+
 }
 
 function showLocation(position) {
-    addMarker({ lat: position.coords.latitude, lng: position.coords.longitude });
+    return new Promise((resolve, reject) => {
+        addMarker({ lat: position.coords.latitude, lng: position.coords.longitude });
+        const latLng = { lat: position.coords.latitude, lng: position.coords.longitude }
+        console.log(latLng)
+        resolve(latLng)
+    })
 }
 
 
