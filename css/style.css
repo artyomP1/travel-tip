@@ -1,3 +1,7 @@
+body {
+    background-color: bisque;
+}
+
 .weather-window {
     width: 20%;
     height: 400px;
@@ -6,7 +10,14 @@
     border-radius: 12px;
 }
 
+.location{
+    justify-content: flex-end;
+}
 
+.btn-copy-loc {
+    height: 2rem;
+    border-radius: 10px;
+}
 /* helpers */
 
 .flex {
@@ -49,7 +60,7 @@
     flex-wrap: wrap;
 }
 
-.align-center {
+.align-right {
     align-items: flex-end;
 }
 
