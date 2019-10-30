@@ -28,5 +28,28 @@ window.onload = () => {
 document.querySelector('.btn').addEventListener('click', (ev) => {
     console.log('Aha!', ev.target);
     mapService.getLocation()
+        .then(pos => {
+            mapService.showLocation(pos)
+            .then(pos=>weatherService.getWeather(pos.lat, pos.lng))
+            // weatherService.getWeather(pos.lat, pos.lng)
+            //     .then()
+        })
 
 })
+
+document.querySelector('.btn-copy-loc').onclick = () => {
+    locService.copyLocation()
+        .then(url => { onCopyLocation(url) })
+}
+
+function onCopyLocation(url) {
+    const el = document.createElement('textarea');
+    el.value = url;
+    el.setAttribute('readonly', '');
+    el.style.position = 'absolute';
+    el.style.left = '-9999px';
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+};

@@ -3,11 +3,8 @@ export default {
     addMarker,
     panTo,
     getLocation,
-
+    showLocation
 }
-console.log('h');
-
-
 var map;
 
 
@@ -55,17 +52,26 @@ function _connectGoogleApi() {
 }
 
 export function getLocation() {
-    if (!navigator.geolocation) {
-        alert("HTML5 Geolocation is not supported in your browser.");
-        return;
-    }
-    navigator.geolocation.getCurrentPosition(showLocation, handleLocationError);
+    return new Promise((resolve, reject) => {
+        if (!navigator.geolocation) {
+            alert("HTML5 Geolocation is not supported in your browser.");
+        }
+
+        // debugger;
+        navigator.geolocation.getCurrentPosition(resolve, handleLocationError)
+
+    })
+
 }
 
 function showLocation(position) {
-    addMarker({ lat: position.coords.latitude, lng: position.coords.longitude });
-    console.log(position.coords.latitude, position.coords.longitude);
-    addLocationName(position.coords.latitude, position.coords.longitude);
+    return new Promise((resolve, reject) => {
+        addMarker({ lat: position.coords.latitude, lng: position.coords.longitude });
+        const latLng = { lat: position.coords.latitude, lng: position.coords.longitude }
+        console.log(latLng)
+        resolve(latLng)
+        addLocationName(position.coords.latitude, position.coords.longitude);
+    })
 }
 
 function addLocationName(lat, lng) {
@@ -90,12 +96,8 @@ function getAnswer(url) {
         return res.data;
     })
 
-    // prm1.then(ans => {
-    //     console.log('Ans:', ans);
-    // })
-    // console.log(prm1);
-
     return Promise.resolve(prm1)
+
 }
 
 
