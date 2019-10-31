@@ -28,7 +28,7 @@ window.onload = () => {
 document.querySelector('.btn-find-location').addEventListener('click', () => {
     const address = document.querySelector('.address-lookup').value
     let coordinates = locService.getLocationGeocode(address.split(' '))
-        coordinates.then(coords => renderCoordinates(coords.results[0].geometry.location))
+    coordinates.then(coords => renderCoordinates(coords.results[0].geometry.location))
 })
 
 
@@ -96,4 +96,7 @@ function renderWeatherInfo(data) {
 function renderCoordinates({lat, lng}){
     const coordinates = `latitude: ${lat}, 'longitude: ${lng}`
     document.querySelector('.coordinates').innerText = coordinates
+    mapService.panTo(lat, lng)
+    mapService.addMarker({lat, lng})
+
 }
