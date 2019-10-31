@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ES6</title>
-        <link rel="stylesheet" href="css/style.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES6</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
 
 <body>
     <h1>Travel TIP</h1>
@@ -15,6 +15,7 @@
         <button class="btn-find-location">Go</button>
         <input type="text" class="address-lookup">
         <h2 class="user-location"></h2>
+        <h3 class="locationError"></h3>
     </div>
     <div class="body-wrapper flex align-start space-around">
         <div class="weather-window flex column align-center"></div>
@@ -25,7 +26,7 @@
     </div>
     <button class="btn-copy-loc">Copy Location</button>
     <span class="coordinates"></span>
-    
+
     <script src="lib/axios.min.js"></script>
     <script type="module" src="js/main.js"></script>
 </body>
